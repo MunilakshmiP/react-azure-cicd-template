@@ -1,19 +1,50 @@
-# React App CI/CD Pipeline (Azure + GitHub Actions)
+# 🛠 dev Branch – React App Deployment to Azure
 
-This repo showcases a CI/CD pipeline using GitHub Actions and Azure App Services.
+This branch represents the **staging environment** of the app. Any code merged here is **automatically deployed to Azure**.
 
-## 🔁 Workflow Summary
-- Feature branches trigger auto-pull requests → require 2 approvals → auto-merge to `dev`
-- `dev` branch triggers React build and deployment to Azure
+---
 
-## 📦 Tools Used
-- GitHub Actions
-- Azure App Services
-- Node.js + Vite
-- jq, curl
+## 🚀 What Happens Here?
 
-## 🚀 Deployment Trigger
-```bash
-git checkout -b feature/my-ui-change
-# make changes
-git push origin feature/my-ui-change
+When new code is pushed or merged into `dev`:
+1. GitHub Actions triggers the `dev-deploy.yml` workflow
+2. The workflow:
+   - Installs dependencies
+   - Builds the React app (via Vite or CRA)
+   - Uploads the `dist/` folder
+   - Deploys it to Azure App Service
+
+---
+
+## ⚙️ Workflow: `dev-deploy.yml`
+
+Key steps include:
+- Checkout code
+- Node.js setup and `npm install`
+- Run `npm run build`
+- Validate that the `dist/` folder exists
+- Upload build artifacts and logs
+- Use Azure's `webapps-deploy` action to publish the app
+
+---
+
+## 🔐 Required GitHub Secret
+
+| Secret Name             | Description                                                   |
+|--------------------------|---------------------------------------------------------------|
+| `AZURE_PUBLISH_PROFILE` | From Azure → Web App → "Get publish profile" XML file content |
+
+Used for authentication to Azure App Services.
+
+---
+
+## 📂 What Should Be in `dev` Branch
+
+- ✅ Full React source code (`src/`, `package.json`, etc.)
+- ✅ `.github/workflows/dev-deploy.yml`
+
+> ❌ Do not push feature code directly here — it should come from merged PRs via `feature/*`.
+
+---
+
+✅ Once merged here, the app is live on Azure — fully automated.
