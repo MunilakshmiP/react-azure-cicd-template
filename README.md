@@ -1,19 +1,16 @@
-# React App CI/CD Pipeline (Azure + GitHub Actions)
+# 🌿 Feature Branch – Auto Pull Request + Auto-Merge
 
-This repo showcases a CI/CD pipeline using GitHub Actions and Azure App Services.
+This is a **feature branch**, such as:
+- `feature/login-page`
+- `feature/fix-navbar`
+- `feature/add-footer`
 
-## 🔁 Workflow Summary
-- Feature branches trigger auto-pull requests → require 2 approvals → auto-merge to `dev`
-- `dev` branch triggers React build and deployment to Azure
+Every push to a `feature/*` branch triggers an **automated GitHub Actions workflow** that:
 
-## 📦 Tools Used
-- GitHub Actions
-- Azure App Services
-- Node.js + Vite
-- jq, curl
+1. 📩 Creates a **pull request** to `dev`
+2. ⚙️ Enables **GitHub-native auto-merge**
+3. ⏳ Waits for the required approval(s)
+4. ✅ Once approved, GitHub merges the PR using **squash**
 
-## 🚀 Deployment Trigger
-```bash
-git checkout -b feature/my-ui-change
-# make changes
-git push origin feature/my-ui-change
+---
+
