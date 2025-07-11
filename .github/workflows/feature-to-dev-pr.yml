@@ -1,4 +1,4 @@
-name: 🚀 Auto PR to dev + Auto-Merge on Approval
+name: 🚀 Auto PR to dev + Auto-Merge on Approvals
 
 on:
   push:
